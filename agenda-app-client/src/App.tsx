@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScheduleContainer from "./components/ScheduleContainer";
 import { RootState } from "./redux/store";
@@ -8,11 +9,17 @@ function App() {
         return state.tasks;
     });
 
+    // test state to delete
+    const [testCounter, setTestCounter] = useState(0);
+
     const dispatch = useDispatch();
 
     return (
         <div className="App">
-            <ScheduleContainer selectedDate={new Date(currentDate)} />
+            <ScheduleContainer
+                testCounter={testCounter}
+                selectedDate={new Date(currentDate).toISOString()}
+            />
             <button
                 onClick={(e) => {
                     const newDate = new Date(currentDate);
@@ -21,6 +28,13 @@ function App() {
                 }}
             >
                 Date++
+            </button>
+            <button
+                onClick={(e) => {
+                    setTestCounter(testCounter + 1);
+                }}
+            >
+                Counter++
             </button>
         </div>
     );
