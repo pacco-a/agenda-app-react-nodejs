@@ -16,6 +16,12 @@ function App() {
 
     return (
         <div className="App">
+            <input
+                onChange={(e) => {
+                    dispatch(setDate(e.target.value));
+                }}
+                type="date"
+            />
             <ScheduleContainer
                 testCounter={testCounter}
                 selectedDate={new Date(currentDate).toISOString()}
