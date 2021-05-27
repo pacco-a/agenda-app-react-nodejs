@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface ITask {
+export interface ITask {
     id?: number;
     date: string;
     details: string;
@@ -13,7 +13,7 @@ const tasksSliceInitialState: {
     currentDate: string;
     currentTasks: ITask[];
 } = {
-    currentDate: new Date(Date.now()).toISOString(),
+    currentDate: new Date(Date.now()).toISOString().substring(0, 10),
     currentTasks: [],
 };
 

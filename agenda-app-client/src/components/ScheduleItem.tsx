@@ -1,14 +1,11 @@
 import { FunctionComponent } from "react";
+import { ITask } from "../redux/tasks";
 
 interface ScheduleItemProps {
-    item: {
-        id: number;
-        resume: string;
-        details: string;
-    };
+    task: ITask;
 }
 
-const ScheduleItem: FunctionComponent<ScheduleItemProps> = ({ item }) => {
+const ScheduleItem: FunctionComponent<ScheduleItemProps> = ({ task: item }) => {
     return <div className="schedule-item">resume : {item.resume}</div>;
 };
 

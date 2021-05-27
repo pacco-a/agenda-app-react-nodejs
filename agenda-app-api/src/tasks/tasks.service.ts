@@ -27,11 +27,9 @@ export class TasksService {
          * l'heure de la tache )
          */
         const firstDayInWeek: Date = new Date(Number(targetDate));
-        firstDayInWeek.setDate(firstDayInWeek.getDate() - daysBeforeInWeek + 1);
+        firstDayInWeek.setDate(firstDayInWeek.getDate() - daysBeforeInWeek);
         const lastDayInWeek: Date = new Date(Number(targetDate));
-        lastDayInWeek.setDate(
-            lastDayInWeek.getDate() + daysAfterInWeek + 1 + 1,
-        );
+        lastDayInWeek.setDate(lastDayInWeek.getDate() + daysAfterInWeek + 1);
 
         const weekTasks = await this.tasksRepository.find({
             where: {
