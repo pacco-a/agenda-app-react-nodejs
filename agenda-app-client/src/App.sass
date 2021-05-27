@@ -1,3 +1,19 @@
+// propriétées générales
+
+html
+    height: 100%
+    margin: 0
+
+body,
+#root,
+.App
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+
+// conteneur des colonnes de tâches
 #schedule-container
     // flex
     display: flex
@@ -17,3 +33,16 @@
 
         .schedule-item
             background: red
+
+// navigateur (changer semaine, avance, reculer, etc)
+#schedule-navigator
+    margin-bottom: 5px
+
+// conteneur pour le fomulaire d'ajout de tache
+// - necessaire car c'est une popup.
+#addtask-form-container
+    form
+        input,
+        textarea,
+        button
+            display: block

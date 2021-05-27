@@ -1,43 +1,24 @@
+import { useSelector } from "react-redux";
 import "./App.sass";
-import { useDispatch, useSelector } from "react-redux";
-import ScheduleContainer from "./components/ScheduleContainer";
+import AddTaskFormContainer from "./components/AddTaskFormContainer";
+import Header from "./components/Header";
+import ScheduleContainer from "./components/schedule/ScheduleContainer";
+import ScheduleNavigator from "./components/schedule/ScheduleNavigator";
 import { RootState } from "./redux/store";
-import { setDate } from "./redux/tasks";
 
 function App() {
-    const { currentDate } = useSelector((state: RootState) => {
-        return state.tasks;
+    const { addTaskPopupOn } = useSelector((state: RootState) => {
+        return state.ui;
     });
-
-    const dispatch = useDispatch();
 
     return (
         <div className="App">
-            <input
-                onChange={(e) => {
-                    // si la date est invalide, skip
-                    if (isNaN(Date.parse(e.target.value))) {
-                        return;
-                    }
+            {/* container-popup pour le formulaire d'ajout de tâche */}
+            {addTaskPopupOn && <AddTaskFormContainer />}
 
-                    dispatch(setDate(e.target.value));
-                }}
-                value={currentDate}
-                type="date"
-            />
-
-            <ScheduleContainer
-                selectedDate={new Date(currentDate).toISOString()}
-            />
-            <button
-                onClick={(e) => {
-                    const newDate = new Date(currentDate);
-                    newDate.setDate(newDate.getDate() + 1);
-                    dispatch(setDate(newDate.toISOString().substring(0, 10)));
-                }}
-            >
-                Date++
-            </button>
+            <Header />
+            <ScheduleNavigator />
+            <ScheduleContainer />
         </div>
     );
 }

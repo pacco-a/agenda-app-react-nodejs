@@ -1,25 +1,22 @@
 import { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { fetchCurrentDateTasks } from "../redux/tasks";
+import { RootState } from "../../redux/store";
+import { fetchCurrentDateTasks } from "../../redux/tasks";
 import ScheduleColumn from "./ScheduleColumn";
 
-interface ScheduleContainerProps {
-    selectedDate: string;
-}
-
-const ScheduleContainer: FunctionComponent<ScheduleContainerProps> = ({
-    selectedDate,
-}) => {
-    const { currentTasks } = useSelector((state: RootState) => {
+/**
+ * conteneur des colonnes de tâches
+ */
+const ScheduleContainer: FunctionComponent = () => {
+    const { currentTasks, currentDate } = useSelector((state: RootState) => {
         return state.tasks;
     });
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCurrentDateTasks(selectedDate));
-    }, [selectedDate, dispatch]);
+        dispatch(fetchCurrentDateTasks(currentDate));
+    }, [currentDate, dispatch]);
 
     return (
         <div id="schedule-container">

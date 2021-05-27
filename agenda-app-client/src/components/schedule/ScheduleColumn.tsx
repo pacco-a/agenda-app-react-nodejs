@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { ITask } from "../redux/tasks";
+import { ITask } from "../../redux/tasks";
 import ScheduleItem from "./ScheduleItem";
 
 interface ScheduleColumnProps {
