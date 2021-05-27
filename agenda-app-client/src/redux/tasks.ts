@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export interface ITask {
     id?: number;
@@ -63,7 +63,8 @@ export const tasksSlice = createSlice({
 
             // si la tache ajoutée est de la même semaine que nous, alors
             // - on l'ajoute dans currentTasks
-            if (moment(state.currentDate).isSame(taskPayload.date, "week")) {
+
+            if (dayjs(state.currentDate).isSame(taskPayload.date, "week")) {
                 state.currentTasks.push(taskPayload);
             }
         });
