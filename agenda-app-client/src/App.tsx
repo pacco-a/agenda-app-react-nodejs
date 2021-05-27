@@ -16,9 +16,11 @@ function App() {
             {/* container-popup pour le formulaire d'ajout de tâche */}
             {addTaskPopupOn && <AddTaskFormContainer />}
 
-            <Header />
-            <ScheduleNavigator />
-            <ScheduleContainer />
+            <div id="main-container">
+                <Header />
+                <ScheduleNavigator />
+                <ScheduleContainer />
+            </div>
         </div>
     );
 }
