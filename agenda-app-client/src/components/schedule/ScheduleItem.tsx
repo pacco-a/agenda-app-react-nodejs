@@ -22,7 +22,9 @@ const ScheduleItem: FunctionComponent<ScheduleItemProps> = ({ task }) => {
     return (
         <div
             onClick={handleOnItemClick}
-            className={`schedule-item color-${task.color}`}
+            className={`schedule-item color-${task.color} ${
+                task.done && "done"
+            }`}
         >
             {task.resume}
         </div>

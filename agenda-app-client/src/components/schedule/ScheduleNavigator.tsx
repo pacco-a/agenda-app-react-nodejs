@@ -23,6 +23,17 @@ const ScheduleNavigator = () => {
                 value={currentDate}
                 type="date"
             />
+            <button
+                onClick={(e) => {
+                    dispatch(
+                        setDate(
+                            new Date(Date.now()).toISOString().substring(0, 10)
+                        )
+                    );
+                }}
+            >
+                Semaine actuelle
+            </button>
         </div>
     );
 };
