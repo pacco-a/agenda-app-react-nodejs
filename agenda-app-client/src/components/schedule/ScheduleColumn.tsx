@@ -13,7 +13,7 @@ const ScheduleColumn: FunctionComponent<ScheduleColumnProps> = ({
 }) => {
     return (
         <div id={`${dayIdentifier}-column`} className="schedule-column">
-            {dayIdentifier} <br />
+            <div className="schedule-column-header">{dayIdentifier}</div>
             {tasks.map((task) => {
                 return <ScheduleItem key={task.id} task={task} />;
             })}

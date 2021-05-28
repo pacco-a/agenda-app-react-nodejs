@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -18,40 +19,51 @@ const ScheduleContainer: FunctionComponent = () => {
         dispatch(fetchCurrentDateTasks(currentDate));
     }, [currentDate, dispatch]);
 
+    /**
+     * renvoi le petit (05/11) a coté du jour
+     */
+    const getDayInfo = (dayIndex: number): string => {
+        return `${dayjs(currentDate).day(dayIndex).format("DD")}/${dayjs(
+            currentDate
+        )
+            .day(dayIndex)
+            .format("MM")}`;
+    };
+
     return (
         <div id="schedule-container">
             <ScheduleColumn
-                dayIdentifier="mon"
+                dayIdentifier={`Lundi ${getDayInfo(1)}`}
                 tasks={currentTasks.filter(
                     (task) => new Date(task.date).getDay() === 1
                 )}
             />
             <ScheduleColumn
-                dayIdentifier="tue"
+                dayIdentifier={`Mardi ${getDayInfo(2)}`}
                 tasks={currentTasks.filter((task) => {
                     return new Date(task.date).getDay() === 2;
                 })}
             />
             <ScheduleColumn
-                dayIdentifier="wed"
+                dayIdentifier={`Mercredi ${getDayInfo(3)}`}
                 tasks={currentTasks.filter(
                     (task) => new Date(task.date).getDay() === 3
                 )}
             />
             <ScheduleColumn
-                dayIdentifier="thu"
+                dayIdentifier={`Jeudi ${getDayInfo(4)}`}
                 tasks={currentTasks.filter(
                     (task) => new Date(task.date).getDay() === 4
                 )}
             />
             <ScheduleColumn
-                dayIdentifier="fri"
+                dayIdentifier={`Vendredi ${getDayInfo(5)}`}
                 tasks={currentTasks.filter(
                     (task) => new Date(task.date).getDay() === 5
                 )}
             />
             <ScheduleColumn
-                dayIdentifier="other"
+                dayIdentifier={`Autre`}
                 tasks={currentTasks.filter(
                     (task) =>
                         new Date(task.date).getDay() === 6 ||

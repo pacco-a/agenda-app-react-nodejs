@@ -8,8 +8,12 @@ interface ScheduleItemProps {
 /**
  * représente une tâche (un seul item dans une colonne)
  */
-const ScheduleItem: FunctionComponent<ScheduleItemProps> = ({ task: item }) => {
-    return <div className="schedule-item">resume : {item.resume}</div>;
+const ScheduleItem: FunctionComponent<ScheduleItemProps> = ({ task }) => {
+    return (
+        <div className={`schedule-item color-${task.color}`}>
+            resume : {task.resume}
+        </div>
+    );
 };
 
 export default ScheduleItem;

@@ -1,3 +1,7 @@
+// sass vars
+
+$main-grey: rgba(128, 128, 128, 0.548)
+
 // propriétées générales
 
 html
@@ -62,6 +66,22 @@ body,
                 min-width: 200px
             input[type=date]
                 min-width: 202px
+// couleurs pour les taches (notamment)
+
+.color-blue
+    background-color: #9197f0
+
+.color-orange
+    background-color: #f59b60
+
+.color-green
+    background-color: #a8f192
+
+.color-red
+    background-color: #eb8282
+
+.color-pink
+    background-color: #f1bbbb
 
 // conteneur des colonnes de tâches
 #schedule-container
@@ -71,18 +91,24 @@ body,
     justify-content: space-around
 
     // props
-    background-color: green
+    border: 2px solid black
     padding-right: 5px
     width: fit-content
 
     .schedule-column
-        background: pink
         width: 120px
         margin: 5px 0px 5px 5px
         padding: 5px 5px
 
+        .schedule-column-header
+            background-color: $main-grey
+            margin: 0px 2px
+            padding: 2px 2px
+            text-align: center
+
         .schedule-item
-            background: red
+            border: 2px dotted black
+            padding: 2px 2px
             margin-top: 5px
 
 // navigateur (changer semaine, avance, reculer, etc)

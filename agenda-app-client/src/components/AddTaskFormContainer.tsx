@@ -30,8 +30,21 @@ const AddTaskFormContainer = () => {
         dispatch(toggleAddTaskPopup());
     };
 
+    // event
+
+    /**
+     * pour enlever la popup en cas de clique hors du formulaire
+     */
+    const onMouseDownContainer: React.MouseEventHandler<HTMLDivElement> = (
+        ev
+    ) => {
+        if ((ev.target as HTMLElement).id === "addtask-form-container") {
+            dispatch(toggleAddTaskPopup());
+        }
+    };
+
     return (
-        <div id="addtask-form-container">
+        <div onMouseDown={onMouseDownContainer} id="addtask-form-container">
             <form onSubmit={onFormSubmit}>
                 <input
                     type="text"
