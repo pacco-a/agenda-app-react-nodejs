@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { addOneTask, ITask } from "../redux/tasks";
 import { toggleAddTaskPopup } from "../redux/ui";
+import ColorSelector from "./ColorSelector";
 
 const AddTaskFormContainer = () => {
     const { currentDate } = useSelector((state: RootState) => state.tasks);
@@ -65,17 +66,12 @@ const AddTaskFormContainer = () => {
                     value={taskDetails}
                     onChange={(e) => setTaskDetails(e.target.value)}
                 ></textarea>
-                <select
-                    name="color"
-                    value={taskColor}
-                    onChange={(e) => setTaskColor(e.target.value)}
-                >
-                    <option value="blue">Bleu</option>
-                    <option value="orange">Orange</option>
-                    <option value="green">Vert</option>
-                    <option value="red">Rouge</option>
-                    <option value="pink">Rose</option>
-                </select>
+                <ColorSelector
+                    customOnClick={(color) => {
+                        setTaskColor(color);
+                    }}
+                    initColor={taskColor}
+                />
                 <button type="submit">Ajouter</button>
             </form>
         </div>

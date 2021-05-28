@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setDate } from "../../redux/tasks";
@@ -11,6 +12,20 @@ const ScheduleNavigator = () => {
 
     return (
         <div id="schedule-navigator">
+            <button
+                onClick={(e) => {
+                    dispatch(
+                        setDate(
+                            dayjs(currentDate)
+                                .subtract(6, "days")
+                                .toISOString()
+                                .substring(0, 10)
+                        )
+                    );
+                }}
+            >
+                ←
+            </button>
             <input
                 onChange={(e) => {
                     // si la date est invalide, skip
@@ -33,6 +48,20 @@ const ScheduleNavigator = () => {
                 }}
             >
                 Semaine actuelle
+            </button>
+            <button
+                onClick={(e) => {
+                    dispatch(
+                        setDate(
+                            dayjs(currentDate)
+                                .add(8, "days")
+                                .toISOString()
+                                .substring(0, 10)
+                        )
+                    );
+                }}
+            >
+                →
             </button>
         </div>
     );
