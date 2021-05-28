@@ -1,6 +1,6 @@
-import { Body } from "@nestjs/common";
+import { Body, Patch } from "@nestjs/common";
 import { Controller, Get, Post, Query } from "@nestjs/common";
-import { CreateTaskDTO } from "./tasks.dto";
+import { CreateTaskDTO, EditTaskDTO } from "./tasks.dto";
 import Task from "./tasks.entity";
 import { TasksService } from "./tasks.service";
 
@@ -29,5 +29,10 @@ export class TasksController {
             createTaskDTO.details,
             createTaskDTO.resume,
         );
+    }
+
+    @Patch()
+    public async updateTask(@Body() editTaskDTO: EditTaskDTO): Promise<Task> {
+        return this.tasksService.UpdateOneTask(editTaskDTO.id, editTaskDTO);
     }
 }

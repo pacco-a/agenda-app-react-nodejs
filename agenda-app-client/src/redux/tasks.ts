@@ -45,6 +45,18 @@ export const addOneTask = createAsyncThunk(
     }
 );
 
+export const updateOneTask = createAsyncThunk(
+    "tasks/updateOneTask",
+    async (task: ITask) => {
+        if (!task.id) {
+            throw new Error("ITask objects needed ID for update request");
+        }
+
+        const res = await axios.patch("/api/tasks", task);
+        return res.data;
+    }
+);
+
 export const tasksSlice = createSlice({
     name: "tasks",
     initialState: tasksSliceInitialState,
@@ -67,6 +79,17 @@ export const tasksSlice = createSlice({
             if (dayjs(state.currentDate).isSame(taskPayload.date, "week")) {
                 state.currentTasks.push(taskPayload);
             }
+        });
+
+        builder.addCase(updateOneTask.fulfilled, (state, action): any => {
+            const payloadTask: ITask = action.payload;
+            state.currentTasks = state.currentTasks.map((task) => {
+                if (task.id === payloadTask.id) {
+                    return payloadTask;
+                }
+
+                return task;
+            });
         });
     },
 });

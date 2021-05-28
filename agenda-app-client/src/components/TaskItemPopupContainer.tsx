@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { updateOneTask } from "../redux/tasks";
 import { toggleTaskItemPopup } from "../redux/ui";
 
 const TaskItemPopupContainer = () => {
@@ -14,6 +15,7 @@ const TaskItemPopupContainer = () => {
     );
     const [taskDetails, setTaskDetails] = useState(taskItemPopup.details);
     const [taskColor, setTaskColor] = useState(taskItemPopup.color);
+    const [taskDone, setTaskDone] = useState(taskItemPopup.done);
 
     /**
      * pour enlever la popup en cas de clique hors du formulaire
@@ -26,9 +28,26 @@ const TaskItemPopupContainer = () => {
         }
     };
 
+    // form submit event
+    const HandleFormSubmit: React.FormEventHandler<HTMLFormElement> = (ev) => {
+        ev.preventDefault();
+
+        dispatch(
+            updateOneTask({
+                id: taskItemPopup.id,
+                color: taskColor,
+                date: taskDate,
+                details: taskDetails,
+                done: taskDone,
+                resume: taskResume,
+            })
+        );
+        dispatch(toggleTaskItemPopup());
+    };
+
     return (
         <div onClick={onMouseDownContainer} id="taskitem-popup-container">
-            <form id="taskitem-popup">
+            <form onSubmit={HandleFormSubmit} id="taskitem-popup">
                 <input
                     type="text"
                     name="resume"
@@ -59,6 +78,15 @@ const TaskItemPopupContainer = () => {
                     <option value="red">Rouge</option>
                     <option value="pink">Rose</option>
                 </select>
+                <div>
+                    <label htmlFor="done">Fini : </label>
+                    <input
+                        onChange={(e) => setTaskDone(e.target.checked)}
+                        checked={taskDone}
+                        type="checkbox"
+                        name="done"
+                    />
+                </div>
                 <button type="submit">Ajouter</button>
             </form>
         </div>

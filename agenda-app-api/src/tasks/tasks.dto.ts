@@ -6,6 +6,7 @@ class CreateTaskDTO {
 }
 
 class EditTaskDTO {
+    public id?: number;
     public color: string;
     public date: string;
     public details: string;
