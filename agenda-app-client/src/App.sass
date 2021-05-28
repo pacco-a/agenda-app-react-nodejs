@@ -35,37 +35,54 @@ body,
         grid-column: 1 / 2
         margin: 8px
 
-    // conteneur pour le fomulaire d'ajout de tache
-    // - necessaire car c'est une popup.
-    #addtask-form-container //popup add task form
-        grid-row: 1 / 2
-        grid-column: 1 / 2
-        z-index: 2
-        background-color: #00000031
+// conteneur pour le fomulaire d'ajout de tache
+// - necessaire car c'est une popup.
+#addtask-form-container //popup add task form
+    grid-row: 1 / 2
+    grid-column: 1 / 2
+    z-index: 2
+    background-color: #00000031
 
-        display: flex
-        justify-content: space-around
+    display: flex
+    justify-content: space-around
 
-        form // only element in this popup container
-            background-color: #ffffff
-            height: fit-content
-            margin-top: 8%
-            padding: 15px
-            border-radius: 2%
+    form // only element in this popup container
+        background-color: #ffffff
+        height: fit-content
+        margin-top: 8%
+        padding: 15px
+        border-radius: 2%
 
-            input,
-            textarea,
-            button,
-            select
-                display: block
-                margin-bottom: 5px
+        input,
+        textarea,
+        button,
+        select
+            display: block
+            margin-bottom: 5px
 
-            textarea
-                min-width: 201px
-            input[type=text]
-                min-width: 200px
-            input[type=date]
-                min-width: 202px
+        textarea
+            min-width: 201px
+        input[type=text]
+            min-width: 200px
+        input[type=date]
+            min-width: 202px
+
+#taskitem-popup-container
+    grid-row: 1 / 2
+    grid-column: 1 / 2
+    z-index: 2
+    background-color: #00000031
+
+    display: flex
+    justify-content: space-around
+
+    #taskitem-popup
+        background-color: #ffffff
+        height: fit-content
+        margin-top: 8%
+        padding: 15px
+        border-radius: 2%
+
 // couleurs pour les taches (notamment)
 
 .color-blue
@@ -82,6 +99,19 @@ body,
 
 .color-pink
     background-color: #f1bbbb
+
+// header
+header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background-color: #e6e6e6
+    margin-bottom: 15px
+    padding: 5px
+
+    button
+        height: 30px
+        margin-right: 10px
 
 // conteneur des colonnes de tâches
 #schedule-container
@@ -113,4 +143,4 @@ body,
 
 // navigateur (changer semaine, avance, reculer, etc)
 #schedule-navigator
-    margin-bottom: 5px
+    margin-bottom: 15px

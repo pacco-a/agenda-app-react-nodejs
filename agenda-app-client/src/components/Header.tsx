@@ -5,7 +5,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     return (
-        <div>
+        <header>
             <h1>Agenda App</h1>
             <button
                 onClick={(e) => {
@@ -14,7 +14,7 @@ const Header = () => {
             >
                 Ajouter une tâche
             </button>
-        </div>
+        </header>
     );
 };
 
