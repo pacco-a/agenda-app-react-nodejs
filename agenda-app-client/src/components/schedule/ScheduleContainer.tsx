@@ -34,40 +34,40 @@ const ScheduleContainer: FunctionComponent = () => {
         <div id="schedule-container">
             <ScheduleColumn
                 dayIdentifier={`Lundi ${getDayInfo(1)}`}
-                tasks={currentTasks.filter(
-                    (task) => new Date(task.date).getDay() === 1
-                )}
+                tasks={currentTasks.filter((task) => {
+                    return dayjs(task.date).day() === 1;
+                })}
             />
             <ScheduleColumn
                 dayIdentifier={`Mardi ${getDayInfo(2)}`}
                 tasks={currentTasks.filter((task) => {
-                    return new Date(task.date).getDay() === 2;
+                    return dayjs(task.date).day() === 2;
                 })}
             />
             <ScheduleColumn
                 dayIdentifier={`Mercredi ${getDayInfo(3)}`}
                 tasks={currentTasks.filter(
-                    (task) => new Date(task.date).getDay() === 3
+                    (task) => dayjs(task.date).day() === 3
                 )}
             />
             <ScheduleColumn
                 dayIdentifier={`Jeudi ${getDayInfo(4)}`}
                 tasks={currentTasks.filter(
-                    (task) => new Date(task.date).getDay() === 4
+                    (task) => dayjs(task.date).day() === 4
                 )}
             />
             <ScheduleColumn
                 dayIdentifier={`Vendredi ${getDayInfo(5)}`}
                 tasks={currentTasks.filter(
-                    (task) => new Date(task.date).getDay() === 5
+                    (task) => dayjs(task.date).day() === 5
                 )}
             />
             <ScheduleColumn
                 dayIdentifier={`Autre`}
                 tasks={currentTasks.filter(
                     (task) =>
-                        new Date(task.date).getDay() === 6 ||
-                        new Date(task.date).getDay() === 0
+                        dayjs(task.date).day() === 6 ||
+                        dayjs(task.date).day() === 0
                 )}
             />
         </div>

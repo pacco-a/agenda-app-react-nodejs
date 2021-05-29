@@ -17,9 +17,8 @@ const ScheduleNavigator = () => {
                     dispatch(
                         setDate(
                             dayjs(currentDate)
-                                .subtract(6, "days")
-                                .toISOString()
-                                .substring(0, 10)
+                                .subtract(7, "days")
+                                .format("YYYY-MM-DD")
                         )
                     );
                 }}
@@ -40,11 +39,7 @@ const ScheduleNavigator = () => {
             />
             <button
                 onClick={(e) => {
-                    dispatch(
-                        setDate(
-                            new Date(Date.now()).toISOString().substring(0, 10)
-                        )
-                    );
+                    dispatch(setDate(dayjs(Date.now()).format("YYYY-MM-DD")));
                 }}
             >
                 Semaine actuelle
@@ -54,9 +49,8 @@ const ScheduleNavigator = () => {
                     dispatch(
                         setDate(
                             dayjs(currentDate)
-                                .add(8, "days")
-                                .toISOString()
-                                .substring(0, 10)
+                                .add(7, "days")
+                                .format("YYYY-MM-DD")
                         )
                     );
                 }}

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -12,7 +13,7 @@ const TaskItemPopupContainer = () => {
     // form states
     const [taskResume, setTaskResume] = useState(taskItemPopup.resume);
     const [taskDate, setTaskDate] = useState(
-        taskItemPopup.date.substring(0, 10)
+        dayjs(taskItemPopup.date).format("YYYY-MM-DD")
     );
     const [taskDetails, setTaskDetails] = useState(taskItemPopup.details);
     const [taskColor, setTaskColor] = useState(taskItemPopup.color);

@@ -15,7 +15,7 @@ const tasksSliceInitialState: {
     currentDate: string;
     currentTasks: ITask[];
 } = {
-    currentDate: new Date(Date.now()).toISOString().substring(0, 10),
+    currentDate: dayjs().format("YYYY-MM-DD"),
     currentTasks: [],
 };
 
@@ -25,10 +25,10 @@ export const fetchCurrentDateTasks = createAsyncThunk(
         console.log("api call for fetch tasks");
 
         const res = await axios.get(
-            `/api/tasks/week?date=${new Date(dateString)
-                .toISOString()
-                .substring(0, 10)}`
+            `/api/tasks/week?date=${dayjs(dateString).format("YYYY-MM-DD")}`
         );
+
+        console.log(res.data);
 
         return res.data;
     }
