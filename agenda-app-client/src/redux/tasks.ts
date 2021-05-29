@@ -73,11 +73,23 @@ export const tasksSlice = createSlice({
         builder.addCase(addOneTask.fulfilled, (state, action) => {
             const taskPayload: ITask = action.payload;
 
-            // si la tache ajoutée est de la même semaine que nous, alors
-            // - on l'ajoute dans currentTasks
-
-            if (dayjs(state.currentDate).isSame(taskPayload.date, "week")) {
-                state.currentTasks.push(taskPayload);
+            // les semaines commenceant à dimanche dans le programme, il faut
+            // - un check supplémentaire
+            if (dayjs(taskPayload.date).day() === 0) {
+                if (
+                    dayjs(state.currentDate).isSame(
+                        dayjs(taskPayload.date).subtract(1, "day"),
+                        "week"
+                    )
+                ) {
+                    state.currentTasks.push(taskPayload);
+                }
+            } else {
+                // si la tache ajoutée est de la même semaine que nous, alors
+                // - on l'ajoute dans currentTasks
+                if (dayjs(state.currentDate).isSame(taskPayload.date, "week")) {
+                    state.currentTasks.push(taskPayload);
+                }
             }
         });
 
