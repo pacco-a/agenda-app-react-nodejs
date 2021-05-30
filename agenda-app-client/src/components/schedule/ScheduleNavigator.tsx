@@ -1,4 +1,7 @@
+import { TextField } from "@material-ui/core";
+import { DatePicker } from "@material-ui/pickers";
 import dayjs from "dayjs";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setDate } from "../../redux/tasks";
@@ -16,7 +19,7 @@ const ScheduleNavigator = () => {
                 onClick={(e) => {
                     dispatch(
                         setDate(
-                            dayjs(currentDate)
+                            dayjs(`${currentDate.substring(0, 10)} 00:00`)
                                 .subtract(7, "days")
                                 .format("YYYY-MM-DD")
                         )
@@ -48,7 +51,7 @@ const ScheduleNavigator = () => {
                 onClick={(e) => {
                     dispatch(
                         setDate(
-                            dayjs(currentDate)
+                            dayjs(`${currentDate.substring(0, 10)} 00:00`)
                                 .add(7, "days")
                                 .format("YYYY-MM-DD")
                         )

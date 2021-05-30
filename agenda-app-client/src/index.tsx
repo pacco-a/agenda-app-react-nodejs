@@ -1,14 +1,19 @@
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import dayjs from "dayjs";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
+import dayjsUtils from "@date-io/dayjs";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <MuiPickersUtilsProvider utils={dayjsUtils}>
+                <App />
+            </MuiPickersUtilsProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")

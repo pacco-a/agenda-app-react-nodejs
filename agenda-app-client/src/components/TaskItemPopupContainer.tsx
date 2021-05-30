@@ -13,7 +13,9 @@ const TaskItemPopupContainer = () => {
     // form states
     const [taskResume, setTaskResume] = useState(taskItemPopup.resume);
     const [taskDate, setTaskDate] = useState(
-        dayjs(taskItemPopup.date).format("YYYY-MM-DD")
+        dayjs(`${taskItemPopup.date.substring(0, 10)} 00:00`).format(
+            "YYYY-MM-DD"
+        )
     );
     const [taskDetails, setTaskDetails] = useState(taskItemPopup.details);
     const [taskColor, setTaskColor] = useState(taskItemPopup.color);

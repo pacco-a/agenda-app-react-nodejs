@@ -77,8 +77,10 @@ export const tasksSlice = createSlice({
             // - un check supplémentaire
             if (dayjs(taskPayload.date).day() === 0) {
                 if (
-                    dayjs(state.currentDate).isSame(
-                        dayjs(taskPayload.date).subtract(1, "day"),
+                    dayjs(`${state.currentDate.substring(0, 10)} 00:00`).isSame(
+                        dayjs(
+                            `${taskPayload.date.substring(0, 10)} 00:00`
+                        ).subtract(1, "day"),
                         "week"
                     )
                 ) {
@@ -87,7 +89,12 @@ export const tasksSlice = createSlice({
             } else {
                 // si la tache ajoutée est de la même semaine que nous, alors
                 // - on l'ajoute dans currentTasks
-                if (dayjs(state.currentDate).isSame(taskPayload.date, "week")) {
+                if (
+                    dayjs(`${state.currentDate.substring(0, 10)} 00:00`).isSame(
+                        taskPayload.date,
+                        "week"
+                    )
+                ) {
                     state.currentTasks.push(taskPayload);
                 }
             }

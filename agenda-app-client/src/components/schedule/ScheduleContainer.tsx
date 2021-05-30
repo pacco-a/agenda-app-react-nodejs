@@ -23,11 +23,16 @@ const ScheduleContainer: FunctionComponent = () => {
      * renvoi le petit (05/11) a coté du jour
      */
     const getDayInfo = (dayIndex: number): string => {
-        return `${dayjs(currentDate).day(dayIndex).format("DD")}/${dayjs(
-            currentDate
-        )
-            .day(dayIndex)
-            .format("MM")}`;
+        if (dayjs(`${currentDate.substring(0, 10)} 00:00`).day() !== 0) {
+            return `${dayjs(`${currentDate.substring(0, 10)} 00:00`)
+                .day(dayIndex)
+                .format("DD/MM")}`;
+        } else {
+            return `${dayjs(`${currentDate.substring(0, 10)} 00:00`)
+                .subtract(1, "day")
+                .day(dayIndex)
+                .format("DD/MM")}`;
+        }
     };
 
     return (
@@ -35,39 +40,47 @@ const ScheduleContainer: FunctionComponent = () => {
             <ScheduleColumn
                 dayIdentifier={`Lundi ${getDayInfo(1)}`}
                 tasks={currentTasks.filter((task) => {
-                    return dayjs(task.date).day() === 1;
+                    return (
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 1
+                    );
                 })}
             />
             <ScheduleColumn
                 dayIdentifier={`Mardi ${getDayInfo(2)}`}
                 tasks={currentTasks.filter((task) => {
-                    return dayjs(task.date).day() === 2;
+                    return (
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 2
+                    );
                 })}
             />
             <ScheduleColumn
                 dayIdentifier={`Mercredi ${getDayInfo(3)}`}
                 tasks={currentTasks.filter(
-                    (task) => dayjs(task.date).day() === 3
+                    (task) =>
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 3
                 )}
             />
             <ScheduleColumn
                 dayIdentifier={`Jeudi ${getDayInfo(4)}`}
                 tasks={currentTasks.filter(
-                    (task) => dayjs(task.date).day() === 4
+                    (task) =>
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 4
                 )}
             />
             <ScheduleColumn
                 dayIdentifier={`Vendredi ${getDayInfo(5)}`}
                 tasks={currentTasks.filter(
-                    (task) => dayjs(task.date).day() === 5
+                    (task) =>
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 5
                 )}
             />
             <ScheduleColumn
                 dayIdentifier={`Autre`}
                 tasks={currentTasks.filter(
                     (task) =>
-                        dayjs(task.date).day() === 6 ||
-                        dayjs(task.date).day() === 0
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() ===
+                            6 ||
+                        dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 0
                 )}
             />
         </div>
