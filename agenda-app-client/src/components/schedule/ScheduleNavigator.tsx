@@ -1,10 +1,11 @@
-import { TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
 import dayjs from "dayjs";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setDate } from "../../redux/tasks";
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 
 /**
  * navigateur (changer semaine, avance, reculer, etc)
@@ -15,7 +16,8 @@ const ScheduleNavigator = () => {
 
     return (
         <div id="schedule-navigator">
-            <button
+            <Button
+                variant="contained"
                 onClick={(e) => {
                     dispatch(
                         setDate(
@@ -26,28 +28,33 @@ const ScheduleNavigator = () => {
                     );
                 }}
             >
-                ←
-            </button>
-            <input
-                onChange={(e) => {
+                <AiOutlineArrowLeft />
+            </Button>
+
+            <DatePicker
+                format="DD/MM/YYYY"
+                value={dayjs(currentDate)}
+                onChange={(targetdate) => {
                     // si la date est invalide, skip
-                    if (isNaN(Date.parse(e.target.value))) {
+                    if (!targetdate) {
                         return;
                     }
 
-                    dispatch(setDate(e.target.value));
+                    dispatch(setDate(targetdate.format("YYYY-MM-DD")));
                 }}
-                value={currentDate}
-                type="date"
             />
-            <button
+
+            <Button
                 onClick={(e) => {
                     dispatch(setDate(dayjs(Date.now()).format("YYYY-MM-DD")));
                 }}
+                variant="contained"
             >
                 Semaine actuelle
-            </button>
-            <button
+            </Button>
+
+            <Button
+                variant="contained"
                 onClick={(e) => {
                     dispatch(
                         setDate(
@@ -58,8 +65,8 @@ const ScheduleNavigator = () => {
                     );
                 }}
             >
-                →
-            </button>
+                <AiOutlineArrowRight />
+            </Button>
         </div>
     );
 };

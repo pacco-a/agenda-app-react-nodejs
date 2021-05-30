@@ -9,13 +9,13 @@ import reportWebVitals from "./reportWebVitals";
 import dayjsUtils from "@date-io/dayjs";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <MuiPickersUtilsProvider utils={dayjsUtils}>
-                <App />
-            </MuiPickersUtilsProvider>
-        </Provider>
-    </React.StrictMode>,
+    // <React.StrictMode>
+    <Provider store={store}>
+        <MuiPickersUtilsProvider utils={dayjsUtils}>
+            <App />
+        </MuiPickersUtilsProvider>
+    </Provider>,
+    // </React.StrictMode>
     document.getElementById("root")
 );
 

@@ -1,6 +1,6 @@
 // sass vars
 
-$main-grey: rgba(128, 128, 128, 0.548)
+$main-grey: #e0e0e0
 
 // propriétées générales
 
@@ -131,13 +131,14 @@ header
     background-color: #e6e6e6
     margin-bottom: 15px
     padding: 5px
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif
 
     h1
         margin-left: 5%
 
-    button
+    .MuiButton-root
         height: 30px
-        margin-right: 10px
+        margin-right: 20px
 
 // conteneur des colonnes de tâches
 #schedule-container
@@ -163,6 +164,8 @@ header
             text-align: center
             user-select: none
             cursor: pointer
+            box-shadow: -1px 1px #b3b3b3
+            border-radius: 5%
 
             &.collapsed
                 opacity: .5
@@ -185,7 +188,8 @@ header
 #schedule-navigator
     margin-bottom: 15px
     &>*
-        margin: 0px 2px
+        margin: 0px 5px
+        height: 30px
 
 // color selector
 
