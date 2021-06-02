@@ -50,7 +50,7 @@ const TaskItemPopupContainer = () => {
     };
 
     return (
-        <div onClick={onMouseDownContainer} id="taskitem-popup-container">
+        <div onMouseDown={onMouseDownContainer} id="taskitem-popup-container">
             <form onSubmit={HandleFormSubmit} id="taskitem-popup">
                 <input
                     type="text"

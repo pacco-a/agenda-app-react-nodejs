@@ -1,3 +1,4 @@
+import { Paper } from "@material-ui/core";
 import dayjs from "dayjs";
 import { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +37,7 @@ const ScheduleContainer: FunctionComponent = () => {
     };
 
     return (
-        <div id="schedule-container">
+        <Paper variant="outlined" id="schedule-container">
             <ScheduleColumn
                 dayIdentifier={`Lundi ${getDayInfo(1)}`}
                 tasks={currentTasks.filter((task) => {
@@ -83,7 +84,7 @@ const ScheduleContainer: FunctionComponent = () => {
                         dayjs(`${task.date.substring(0, 10)} 00:00`).day() === 0
                 )}
             />
-        </div>
+        </Paper>
     );
 };
 

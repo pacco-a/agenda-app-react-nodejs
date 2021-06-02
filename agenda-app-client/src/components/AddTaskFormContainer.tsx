@@ -1,28 +1,33 @@
 import React, { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { addOneTask, ITask } from "../redux/tasks";
 import { toggleAddTaskPopup } from "../redux/ui";
 import ColorSelector from "./ColorSelector";
 
+interface Inputs {
+    resume: string;
+    date: string;
+    details: string;
+}
+
 const AddTaskFormContainer = () => {
+    const { register, handleSubmit } = useForm<Inputs>();
+
     const { currentDate } = useSelector((state: RootState) => state.tasks);
 
     const dispatch = useDispatch();
 
-    // form states
-    const [taskResume, setTaskResume] = useState("");
-    const [taskDate, setTaskDate] = useState(currentDate);
-    const [taskDetails, setTaskDetails] = useState("");
     const [taskColor, setTaskColor] = useState("blue");
 
     // events
-    const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (ev) => {
-        ev.preventDefault();
+
+    const newSubmitHandler: SubmitHandler<Inputs> = (data) => {
         const newTask: ITask = {
-            resume: taskResume,
-            date: taskDate,
-            details: taskDetails,
+            resume: data.resume,
+            date: data.date,
+            details: data.details,
             done: false,
             color: taskColor,
         };
@@ -46,25 +51,22 @@ const AddTaskFormContainer = () => {
 
     return (
         <div onMouseDown={onMouseDownContainer} id="addtask-form-container">
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={handleSubmit(newSubmitHandler)}>
                 <input
                     type="text"
-                    name="resume"
                     placeholder="nom de la tâche"
-                    value={taskResume}
-                    onChange={(e) => setTaskResume(e.target.value)}
+                    defaultValue=""
+                    {...register("resume")}
                 />
                 <input
                     type="date"
-                    name="date"
-                    value={taskDate}
-                    onChange={(e) => setTaskDate(e.target.value)}
+                    defaultValue={currentDate}
+                    {...register("date")}
                 />
                 <textarea
-                    name="details"
                     placeholder="details de la tache"
-                    value={taskDetails}
-                    onChange={(e) => setTaskDetails(e.target.value)}
+                    defaultValue={""}
+                    {...register("details")}
                 ></textarea>
                 <ColorSelector
                     customOnClick={(color) => {

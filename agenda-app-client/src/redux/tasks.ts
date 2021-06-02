@@ -75,6 +75,7 @@ export const tasksSlice = createSlice({
 
             // les semaines commenceant à dimanche dans le programme, il faut
             // - un check supplémentaire
+            // TODO horaire quebec : il y a un bug avec l'actualisation des currentTasks coté qc ):
             if (dayjs(taskPayload.date).day() === 0) {
                 if (
                     dayjs(`${state.currentDate.substring(0, 10)} 00:00`).isSame(
