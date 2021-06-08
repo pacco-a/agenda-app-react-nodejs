@@ -17,6 +17,9 @@ export class UsersController {
             return { error: "user already exists" };
         }
 
-        console.log(registerUserDto);
+        return this.userService.createUser(
+            registerUserDto.username,
+            registerUserDto.password,
+        );
     }
 }

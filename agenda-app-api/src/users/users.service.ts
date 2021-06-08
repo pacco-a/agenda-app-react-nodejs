@@ -17,7 +17,7 @@ export class UsersService {
         return user;
     }
 
-    async createTask(password: string, username: string): Promise<User> {
+    async createUser(password: string, username: string): Promise<User> {
         const newUser = this.userRepository.create({
             username: username,
             password: password,
