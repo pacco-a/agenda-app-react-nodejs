@@ -14,11 +14,17 @@ const ScheduleContainer: FunctionComponent = () => {
         return state.tasks;
     });
 
+    const { isLogIn } = useSelector((state: RootState) => {
+        return state.users;
+    });
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCurrentDateTasks(currentDate));
-    }, [currentDate, dispatch]);
+        if (isLogIn) {
+            dispatch(fetchCurrentDateTasks(currentDate));
+        }
+    }, [currentDate, isLogIn, dispatch]);
 
     /**
      * renvoi le petit (05/11) a coté du jour

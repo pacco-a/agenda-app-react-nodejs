@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Req, Request } from "@nestjs/common";
+import { Request as RequestObj } from "express";
 import { RegisterUserDto } from "./users.dto";
 import { UsersService } from "./users.service";
 
@@ -21,5 +22,10 @@ export class UsersController {
             registerUserDto.username,
             registerUserDto.password,
         );
+    }
+
+    @Get("islogin")
+    public isLogin(@Request() req): boolean {
+        return req.user ? true : false;
     }
 }

@@ -36,6 +36,43 @@ body,
         margin: 8px auto
         max-width: 850px
 
+#login-popup-container
+    grid-row: 1 / 2
+    grid-column: 1 / 2
+    z-index: 2
+    background-color: #00000031
+
+    display: flex
+    justify-content: space-around
+
+    form // only element in this popup container
+        background-color: #ffffff
+        height: fit-content
+        margin-top: 8%
+        padding: 15px
+        border-radius: 2%
+        max-width: 250px
+
+        input,
+        textarea,
+        button,
+        select
+            display: block
+            margin-bottom: 5px
+
+        textarea
+            height: 110px
+            resize: none
+
+        textarea
+            min-width: 201px
+        input[type=text]
+            min-width: 200px
+        input[type=date]
+            min-width: 202px
+        input[type=password]
+            min-width: 200px
+
 // conteneur pour le fomulaire d'ajout de tache
 // - necessaire car c'est une popup.
 #addtask-form-container //popup add task form

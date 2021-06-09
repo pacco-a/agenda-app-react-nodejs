@@ -4,10 +4,12 @@ import { ITask } from "./tasks";
 const uiSliceInitialstate: {
     addTaskPopupOn: boolean;
     taskItemPopupOn: boolean;
+    loginPopupOn: boolean;
     taskItemPopup: ITask;
 } = {
     addTaskPopupOn: false,
     taskItemPopupOn: false,
+    loginPopupOn: false,
     taskItemPopup: {
         resume: "none",
         color: "none",
@@ -30,10 +32,17 @@ export const uiSlice = createSlice({
         setTaskItem: (state, action: PayloadAction<ITask>) => {
             state.taskItemPopup = action.payload;
         },
+        setLoginPopupOn: (state, action: PayloadAction<boolean>) => {
+            state.loginPopupOn = action.payload;
+        },
     },
 });
 
-export const { toggleAddTaskPopup, toggleTaskItemPopup, setTaskItem } =
-    uiSlice.actions;
+export const {
+    setLoginPopupOn,
+    toggleAddTaskPopup,
+    toggleTaskItemPopup,
+    setTaskItem,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;
