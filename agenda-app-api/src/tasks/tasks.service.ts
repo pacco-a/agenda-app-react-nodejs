@@ -10,7 +10,10 @@ export class TasksService {
         @InjectRepository(Task) private tasksRepository: Repository<Task>,
     ) {}
 
-    public async getWeekTasksByDate(targetDate: Date): Promise<Task[]> {
+    public async getWeekTasksByDate(
+        targetDate: Date,
+        userId: number,
+    ): Promise<Task[]> {
         if (targetDate.getDay() === 0) {
             targetDate.setDate(targetDate.getDate() - 1);
         }
@@ -37,6 +40,7 @@ export class TasksService {
                     firstDayInWeek.toISOString(),
                     lastDayInWeek.toISOString(),
                 ),
+                userId,
             },
         });
 
@@ -48,12 +52,14 @@ export class TasksService {
         date: Date,
         details: string,
         resume: string,
+        userId: number,
     ): Promise<Task> {
         const newTask = this.tasksRepository.create({
             color,
             date,
             details,
             resume,
+            userId,
         });
 
         return this.tasksRepository.save(newTask);

@@ -21,6 +21,7 @@ const ScheduleContainer: FunctionComponent = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log(isLogIn);
         if (isLogIn) {
             dispatch(fetchCurrentDateTasks(currentDate));
         }

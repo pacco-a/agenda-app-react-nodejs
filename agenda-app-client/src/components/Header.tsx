@@ -1,7 +1,8 @@
 import { Button } from "@material-ui/core";
-import React from "react";
+import axios from "axios";
 import { useDispatch } from "react-redux";
-import { toggleAddTaskPopup } from "../redux/ui";
+import { setLoginPopupOn, toggleAddTaskPopup } from "../redux/ui";
+import { setIsLogin } from "../redux/users";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,23 @@ const Header = () => {
                 }}
             >
                 Ajouter une tâche
+            </Button>
+            <Button
+                variant="outlined"
+                color="secondary"
+                onClick={(e) => {
+                    axios
+                        .get("/api/users/logout")
+                        .then(() => {
+                            dispatch(setIsLogin(false));
+                            dispatch(setLoginPopupOn(true));
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        });
+                }}
+            >
+                Deconnexion
             </Button>
         </header>
     );

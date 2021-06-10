@@ -17,6 +17,9 @@ export default class Task {
     @Column()
     color: string;
 
+    @Column()
+    userId: number;
+
     @Column({
         default: false,
     })

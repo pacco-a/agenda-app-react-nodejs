@@ -30,6 +30,7 @@ function App() {
 
             if (isLogin) {
                 dispatch(setLoginPopupOn(false));
+                dispatch(setIsLogin(true));
             } else {
                 dispatch(setLoginPopupOn(true));
                 dispatch(setIsLogin(false));

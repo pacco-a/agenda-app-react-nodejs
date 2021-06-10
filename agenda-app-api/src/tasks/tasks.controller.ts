@@ -1,5 +1,6 @@
-import { Body, Patch } from "@nestjs/common";
+import { Body, Patch, Request, UseGuards } from "@nestjs/common";
 import { Controller, Get, Post, Query } from "@nestjs/common";
+import { AuthenticatedGuard } from "src/auth/authenticated.guard";
 import { CreateTaskDTO, EditTaskDTO } from "./tasks.dto";
 import Task from "./tasks.entity";
 import { TasksService } from "./tasks.service";
@@ -8,8 +9,12 @@ import { TasksService } from "./tasks.service";
 export class TasksController {
     constructor(private tasksService: TasksService) {}
 
+    @UseGuards(AuthenticatedGuard)
     @Get("week")
-    public async getWeek(@Query("date") date: string): Promise<Object> {
+    public async getWeek(
+        @Query("date") date: string,
+        @Request() req,
+    ): Promise<Object> {
         if (isNaN(Date.parse(date))) {
             return {
                 error: "Wrong date query parameter (correct ex: 2021-05-05)",
@@ -18,16 +23,21 @@ export class TasksController {
 
         const requestedDate = new Date(Date.parse(date));
 
-        return this.tasksService.getWeekTasksByDate(requestedDate);
+        return this.tasksService.getWeekTasksByDate(requestedDate, req.user.id);
     }
 
+    @UseGuards(AuthenticatedGuard)
     @Post()
-    public async postTask(@Body() createTaskDTO: CreateTaskDTO): Promise<Task> {
+    public async postTask(
+        @Body() createTaskDTO: CreateTaskDTO,
+        @Request() req,
+    ): Promise<Task> {
         return this.tasksService.createTask(
             createTaskDTO.color,
             new Date(createTaskDTO.date),
             createTaskDTO.details,
             createTaskDTO.resume,
+            req.user.id,
         );
     }
 

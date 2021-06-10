@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { setLoginPopupOn } from "../redux/ui";
+import { setIsLogin } from "../redux/users";
 
 interface LoginFormInputs {
     username: string;
@@ -8,6 +11,8 @@ interface LoginFormInputs {
 }
 
 const LoginPopupContainer = () => {
+    const dispatch = useDispatch();
+
     const [errorMess, setErrorMess] = useState("");
 
     const { register, handleSubmit } = useForm<LoginFormInputs>();
@@ -22,6 +27,8 @@ const LoginPopupContainer = () => {
             });
 
             setErrorMess("");
+            dispatch(setIsLogin(true));
+            dispatch(setLoginPopupOn(false));
         } catch (error) {
             setErrorMess(
                 "Une erreur est survenue, est-ce la bonne combinaison login/mot de passe ?"

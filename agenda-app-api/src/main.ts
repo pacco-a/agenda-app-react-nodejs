@@ -4,17 +4,15 @@ import { join } from "path";
 import { AppModule } from "./app.module";
 import * as session from "express-session";
 import * as passport from "passport";
-import {
-    ConnectionManager,
-    createConnection,
-    getConnectionManager,
-} from "typeorm";
-import { config } from "ormconfig";
+import { getConnectionManager } from "typeorm";
 import { Session } from "./session/session.entity";
 import { TypeormStore } from "connect-typeorm/out";
+import * as cookieParser from "cookie-parser";
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+    app.use(cookieParser());
 
     const connManager = getConnectionManager();
 
